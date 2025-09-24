@@ -309,6 +309,9 @@
       </section>
     </main>
   </div>
+ <!-- Notification Sound -->
+  <audio id="notificationSound" src="https://jury-enlargement-graphical-talks.trycloudflare.com/uploads/agents/ding.mp3" preload="auto"></audio>
+
 
   <!-- SOCKET -->
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
@@ -1163,7 +1166,14 @@ function handleIncomingMessage(msg) {
   };
 
   pushMessage(msg.phone, messageObj);
+ pushMessage(msg.phone, messageObj);
+// 🔔 Play notification sound if sender is Client
+  if (msg.sender === "Client") {
+    const sound = document.getElementById("notificationSound");
+    sound.play().catch(err => console.log("Audio play blocked:", err));
+  }
 }
+
 
 
 </script>
